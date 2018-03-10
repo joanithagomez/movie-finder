@@ -43,9 +43,10 @@ class Movie extends Component{
         let i;
         if (!cast)
             return;    
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 4; i++) {
             arr.push(<li value={i} key={"cast" + i}>
-                {cast[i].name}    
+                <img src=""/>    
+                {cast[i].name} - {cast[i].character} 
                 {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
             </li>);
         }
@@ -57,7 +58,7 @@ class Movie extends Component{
         let i;
         if (!crew)
             return;    
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 4; i++) {
             arr.push(<li value={i} key={"crew" + i}>
                 {crew[i].name} : {crew[i].job}    
                 {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
