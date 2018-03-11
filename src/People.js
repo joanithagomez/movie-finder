@@ -2,6 +2,26 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "whatwg-fetch";
 
+const PhotoCard = styled.div`
+  color: white;
+  display: inline-block;
+   justify-content: center;
+   ${"" /* border: 1px solid red; */}
+> div
+    display:flex;
+    ${"" /* border: 1px solid yellow; */};
+  }
+  > h4{
+    display: block;
+  }
+  > div > p{
+    font-weight: 100;
+    font-size: 0.8em;
+  }
+`;
+
+const Wrapper = styled.div`display: block;`;
+
 class People extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +61,7 @@ class People extends Component {
     else end = 3;
 
     arr.push(<h4>Cast</h4>);
+
     for (i = 0; i < end; i++) {
       // console.log(headshotUrl);
       if (this.state.credits.cast[i].profile_path != null)
@@ -52,11 +73,14 @@ class People extends Component {
       }
 
       arr.push(
-        <span value={i} key={"cast" + i}>
-          <img src={headshotUrl} alt="cast" />
-          {cast[i].name} - {cast[i].character}
-          {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
-        </span>
+        <PhotoCard>
+          <div value={i} key={"cast" + i}>
+            <img src={headshotUrl} alt="cast" />
+            <p>{cast[i].name}</p>
+            <p>{cast[i].character}</p>
+            {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
+          </div>
+        </PhotoCard>
       );
     }
     return arr;
@@ -86,11 +110,14 @@ class People extends Component {
       }
 
       arr.push(
-        <span value={i} key={"crew" + i}>
-          <img src={headshotUrl} alt="crew" />
-          {crew[i].name} : {crew[i].job}
-          {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
-        </span>
+        <PhotoCard>
+          <div value={i} key={"crew" + i}>
+            <img src={headshotUrl} alt="crew" />
+            <p>{crew[i].name}</p>
+            <p>{crew[i].job}</p>
+            {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
+          </div>
+        </PhotoCard>
       );
     }
     return arr;
@@ -100,11 +127,10 @@ class People extends Component {
     // if (this.state.credits.crew) {
     // }
     return (
-      <div>
+      <Wrapper>
         {this.renderCrew(this.state.credits.crew)}
-
         {this.renderCast(this.state.credits.cast)}
-      </div>
+      </Wrapper>
     );
   }
 }
