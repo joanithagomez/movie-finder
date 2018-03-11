@@ -13,9 +13,9 @@ class Home extends Component{
         }
     }
 
-
     handleSubmit(e) {
         if (e.key === 'Enter') {
+            // this.props.history.push('/results');
             mdb.searchMovie({ query: this.state.title }, (err, res) => {
                 if (res) {
                     this.setState({ recommendations: res.results });
