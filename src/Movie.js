@@ -103,6 +103,7 @@ class Movie extends Component {
 
   render() {
     let bgUrl;
+    let posterUrl;
     var baseUrl;
     if (this.state.imageResult.images) {
       baseUrl = this.state.imageResult.images.base_url;
@@ -110,6 +111,10 @@ class Movie extends Component {
         baseUrl +
         this.state.imageResult.images.backdrop_sizes[3] +
         this.state.movieResult.backdrop_path;
+      posterUrl =
+        baseUrl +
+        this.state.imageResult.images.poster_sizes[3] +
+        this.state.movieResult.poster_path;
     }
 
     return (
@@ -122,6 +127,7 @@ class Movie extends Component {
               </p>
               <h1>{this.state.movieResult.title}</h1>
               <h2>{this.state.movieResult.tagline}</h2>
+              {/* <img src={posterUrl} alt="poster" /> */}
               <p>{this.state.movieResult.release_date}</p>
 
               <p>{this.state.movieResult.overview}</p>

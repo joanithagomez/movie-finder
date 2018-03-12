@@ -100,26 +100,43 @@ class People extends Component {
     else end = 3;
 
     arr.push(<h4>Crew</h4>);
-    for (i = 0; i < end; i++) {
-      if (this.state.credits.crew[i].profile_path != null)
+    for (i = 1; i <= end; i++) {
+      if (this.state.credits.crew[i - 1].profile_path != null)
         headshotUrl =
-          this.props.baseUrl + "w185" + this.state.credits.crew[i].profile_path;
+          this.props.baseUrl + "w185" + this.state.credits.crew[i - 1].profile_path;
       else {
         headshotUrl =
           "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
       }
 
+      // let jobtitle;
+      // let headshot;
+      // if (crew[i - 1].name === crew[i].name) {
+      //   headshot = <img src={headshotUrl} alt="crew" />;
+      //   jobtitle = crew[i - 1].job + ", " + crew[i].job;
+      //   end += 4;
+      //   arr.push(
+      //     <PhotoCard>
+      //       <div value={i} key={"crew" + i}>
+      //         {headshot}
+      //         <p>{crew[i - 1].name}</p>
+      //         <p>{jobtitle}</p>
+      //       </div>
+      //     </PhotoCard>
+      //   );
+      // } else {
       arr.push(
         <PhotoCard>
-          <div value={i} key={"crew" + i}>
+          <div value={i - 1} key={"crew" + i - 1}>
             <img src={headshotUrl} alt="crew" />
-            <p>{crew[i].name}</p>
-            <p>{crew[i].job}</p>
+            <p>{crew[i - 1].name}</p>
+            <p>{crew[i - 1].job}</p>
             {/* <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link> */}
           </div>
         </PhotoCard>
       );
     }
+    // }
     return arr;
   }
 
