@@ -60,7 +60,7 @@ class People extends Component {
     if (cast.length < 3) end = cast.length;
     else end = 3;
 
-    arr.push(<h4>Cast</h4>);
+    arr.push(<h4 key="cast">Cast</h4>);
 
     for (i = 0; i < end; i++) {
       // console.log(headshotUrl);
@@ -73,7 +73,7 @@ class People extends Component {
       }
 
       arr.push(
-        <PhotoCard>
+        <PhotoCard key={"photocardcast" + i}>
           <div value={i} key={"cast" + i}>
             <img src={headshotUrl} alt="cast" />
             <p>{cast[i].name}</p>
@@ -99,7 +99,7 @@ class People extends Component {
     if (crew.length < 3) end = crew.length;
     else end = 3;
 
-    arr.push(<h4>Crew</h4>);
+    arr.push(<h4 key="crew">Crew</h4>);
     for (i = 1; i <= end; i++) {
       if (this.state.credits.crew[i - 1].profile_path != null)
         headshotUrl =
@@ -116,8 +116,8 @@ class People extends Component {
         jobtitle = crew[i - 1].job + ", " + crew[i].job;
         end += 4;
         arr.push(
-          <PhotoCard>
-            <div value={i} key={"crew" + i}>
+          <PhotoCard key={"photocardcr" + i - 1}>
+            <div value={i} key={"cr" + i - 1}>
               {headshot}
               <p>{crew[i - 1].name}</p>
               <p>{jobtitle}</p>
@@ -127,8 +127,8 @@ class People extends Component {
         i++;
       } else {
         arr.push(
-          <PhotoCard>
-            <div value={i - 1} key={"crew" + i - 1}>
+          <PhotoCard key={"photocardcrew" + i}>
+            <div value={i - 1} key={"crew" + i}>
               <img src={headshotUrl} alt="crew" />
               <p>{crew[i - 1].name}</p>
               <p>{crew[i - 1].job}</p>
@@ -142,8 +142,6 @@ class People extends Component {
   }
 
   render() {
-    // if (this.state.credits.crew) {
-    // }
     return (
       <Wrapper>
         {this.renderCrew(this.state.credits.crew)}
