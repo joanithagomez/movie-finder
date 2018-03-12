@@ -127,7 +127,7 @@ class Movie extends Component {
               </p>
               <h1>{this.state.movieResult.title}</h1>
               <h2>{this.state.movieResult.tagline}</h2>
-              {/* <img src={posterUrl} alt="poster" /> */}
+              <img src={posterUrl} alt="poster" />
               <p>{this.state.movieResult.release_date}</p>
 
               <p>{this.state.movieResult.overview}</p>
