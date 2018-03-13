@@ -58,7 +58,7 @@ class Home extends Component {
     return (
       <Wrapper>
         <h1>MovieLookup</h1>
-        Enter movie:
+        Search:
         <input
           type="text"
           value={this.state.title}
