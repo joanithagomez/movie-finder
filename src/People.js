@@ -45,16 +45,18 @@ class People extends Component {
     arr.push(<h4 key="cast">Cast</h4>);
 
     for (i = 0; i < end; i++) {
-      if (!sofar[cast[i].name]) sofar[cast[i].name] = [cast[i].job];
+      if (!sofar[cast[i].name]) sofar[cast[i].name] = [cast[i].character];
       else {
         innerarr = sofar[cast[i].name];
-        innerarr.push(cast[i].job);
+        innerarr.push(", " + cast[i].character);
         sofar[cast[i].name] = innerarr;
       }
     }
 
     for (var person in sofar) {
       personIndex = cast.findIndex(x => x.name === person);
+      console.log(sofar[person]);
+
       if (cast[personIndex].profile_path != null) {
         headshotUrl = this.props.baseUrl + "w185" + cast[personIndex].profile_path;
       } else {
@@ -94,14 +96,14 @@ class People extends Component {
       if (!sofar[crew[i].name]) sofar[crew[i].name] = [crew[i].job];
       else {
         innerarr = sofar[crew[i].name];
-        innerarr.push(crew[i].job);
+        innerarr.push(", " + crew[i].job);
         sofar[crew[i].name] = innerarr;
       }
     }
 
     for (var person in sofar) {
       personIndex = crew.findIndex(x => x.name === person);
-      console.log(personIndex);
+      console.log(sofar[person]);
       if (crew[personIndex].profile_path != null)
         headshotUrl = this.props.baseUrl + "w185" + crew[personIndex].profile_path;
       else {
