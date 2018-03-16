@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ReleaseDate from "./ReleaseDate";
 const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
 const Wrapper = styled.div`
@@ -17,6 +18,10 @@ const Wrapper = styled.div`
   }
 `;
 
+const List = styled.li`
+list-style:none;
+`
+
 class Home extends Component {
   constructor() {
     super();
@@ -32,6 +37,7 @@ class Home extends Component {
       // this.props.history.push('/results');
       mdb.searchMovie({ query: this.state.title }, (err, res) => {
         if (res) {
+          
           this.setState({ recommendations: res.results });
         }
       });
@@ -42,9 +48,10 @@ class Home extends Component {
     let arr = [];
     for (var i in recoms) {
       arr.push(
-        <li value={i} key={"movie" + i}>
-          <Link to={"/movie/" + recoms[i].id}>{recoms[i].title}</Link>
-        </li>
+        <List value={i} key={"movie" + i}>
+          <Link to={"/movie/" + recoms[i].id}>{recoms[i].title} </Link>
+          (<ReleaseDate release_date={recoms[i].release_date}></ReleaseDate>)
+        </List>
       );
     }
     return arr;

@@ -44,7 +44,7 @@ class Movie extends Component {
     )
       .then(response => response.json())
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({ movieResult: res });
       });
   }

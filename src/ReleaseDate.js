@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const Year = styled.div`
+const Year = styled.span`
   opacity: 0.8;
   font-size: 0.8em;
 `;

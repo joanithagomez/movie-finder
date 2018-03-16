@@ -55,7 +55,7 @@ class People extends Component {
 
     for (var person in sofar) {
       personIndex = cast.findIndex(x => x.name === person);
-      console.log(sofar[person]);
+      // console.log(sofar[person]);
 
       if (cast[personIndex].profile_path != null) {
         headshotUrl = this.props.baseUrl + "w185" + cast[personIndex].profile_path;
@@ -103,7 +103,7 @@ class People extends Component {
 
     for (var person in sofar) {
       personIndex = crew.findIndex(x => x.name === person);
-      console.log(sofar[person]);
+      // console.log(sofar[person]);
       if (crew[personIndex].profile_path != null)
         headshotUrl = this.props.baseUrl + "w185" + crew[personIndex].profile_path;
       else {
