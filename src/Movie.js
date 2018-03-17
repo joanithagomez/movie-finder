@@ -10,28 +10,13 @@ class Movie extends Component {
     super(props);
     this.state = {
       movieResult: {},
-      imageResult: {}
     };
   }
 
   componentDidMount() {
-    this.fetchConfig();
     this.fetchInfo();
   }
 
-  fetchConfig() {
-    fetch(
-      "https://api.themoviedb.org/3/configuration?api_key=c3111a004530dd2c7aede7c5e398885e",
-      {
-        method: "GET"
-      }
-    )
-      .then(response => response.json())
-      .then(res => {
-        // console.log("fetchconfig: " + res);
-        this.setState({ imageResult: res });
-      });
-  }
 
   fetchInfo() {
     fetch(
@@ -50,18 +35,19 @@ class Movie extends Component {
   }
 
   render() {
+    // console.log(this.props.match)
     let bgUrl;
     let posterUrl;
-    var baseUrl;
-    if (this.state.imageResult.images) {
-      baseUrl = this.state.imageResult.images.base_url;
+    let baseUrl;
+    if (this.props.imageResult.images) {
+      baseUrl = this.props.imageResult.images.base_url;
       bgUrl =
         baseUrl +
-        this.state.imageResult.images.backdrop_sizes[3] +
+        this.props.imageResult.images.backdrop_sizes[3] +
         this.state.movieResult.backdrop_path;
       posterUrl =
         baseUrl +
-        this.state.imageResult.images.poster_sizes[2] +
+        this.props.imageResult.images.poster_sizes[2] +
         this.state.movieResult.poster_path;
     }
 
@@ -88,7 +74,7 @@ class Movie extends Component {
               </OverView>
               <People
                 baseUrl={baseUrl}
-                imageResult={this.state.imageResult}
+                imageResult={this.props.imageResult}
                 match={this.props.match}
               />
             </Content>

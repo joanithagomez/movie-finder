@@ -9,9 +9,7 @@ const Wrapper = styled.div`
   height: 100%;
   background-color: black;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 
   > h1 {
     margin: 0;
@@ -28,7 +26,7 @@ class Home extends Component {
     this.state = {
       title: "",
       recommendations: [],
-      id: 0
+      id: 0,
     };
   }
 
@@ -36,8 +34,7 @@ class Home extends Component {
     if (e.key === "Enter") {
       // this.props.history.push('/results');
       mdb.searchMovie({ query: this.state.title }, (err, res) => {
-        if (res) {
-          
+        if (res) {          
           this.setState({ recommendations: res.results });
         }
       });
@@ -46,11 +43,19 @@ class Home extends Component {
 
   renderMovies(recoms) {
     let arr = [];
+    let baseUrl;
+    var posterUrl;
+    baseUrl = this.props.imageResult.images.base_url;
+
     for (var i in recoms) {
+      posterUrl = baseUrl + this.props.imageResult.images.poster_sizes[0] + recoms[i].poster_path;
       arr.push(
         <List value={i} key={"movie" + i}>
-          <Link to={"/movie/" + recoms[i].id}>{recoms[i].title} </Link>
-          (<ReleaseDate release_date={recoms[i].release_date}></ReleaseDate>)
+          <Link to={"/movie/" + recoms[i].id}>
+            <img src= {posterUrl} alt="poster"/>
+            {recoms[i].title}
+            (<ReleaseDate release_date={recoms[i].release_date}></ReleaseDate>)
+          </Link>  
         </List>
       );
     }
@@ -72,7 +77,9 @@ class Home extends Component {
           onKeyPress={this.handleSubmit.bind(this)}
           onChange={this.handleTitleChange}
         />
-        <ul>{this.renderMovies(this.state.recommendations)}</ul>
+     
+        {this.props.imageResult.images && <ul>{this.renderMovies(this.state.recommendations)}</ul>}
+        
       </Wrapper>
     );
   }
