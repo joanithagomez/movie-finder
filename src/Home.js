@@ -18,20 +18,25 @@ const Wrapper = styled.div`
   }
 `;
 const Recommendations = styled.div`color: white;`;
-const List = styled.li`list-style: none;`;
+const List = styled.li`
+  list-style: none;
+  background-color: white;
+  border: 1px solid grey;
+`;
 const InputWrapper = styled.div`
   font-size: 2em;
   font-weight: 200;
+  padding: 2em 0;
 
   > input {
     font-size: 1em;
     font-weight: 200;
+    text-align: center;
     border: none;
     border-bottom: 1px solid grey;
     background-color: transparent;
-    padding: 0.2em 1em;
-    width: 80%;
-    text-align: center;
+    padding: 0.2em 0;
+    width: 100%;
     transition: 0.2s border ease-in;
     color: white;
   }
@@ -40,6 +45,7 @@ const InputWrapper = styled.div`
     outline: none;
     border-bottom: 1px solid white;
   }
+
   @media screen and (max-width: 45em) {
     font-size: 3em;
     > input {
@@ -99,20 +105,22 @@ class Home extends Component {
   render() {
     return (
       <Wrapper>
-        <InputWrapper>
-          What movie are you after?
-          <input
-            type="text"
-            value={this.state.title}
-            onKeyPress={this.handleSubmit.bind(this)}
-            onChange={this.handleTitleChange}
-          />
-        </InputWrapper>
-        <Recommendations>
-          {this.props.imageResult.images && (
-            <ul>{this.renderMovies(this.state.recommendations)}</ul>
-          )}
-        </Recommendations>
+        <div>
+          <InputWrapper>
+            What movie are you after?
+            <input
+              type="text"
+              value={this.state.title}
+              onKeyPress={this.handleSubmit.bind(this)}
+              onChange={this.handleTitleChange}
+            />
+          </InputWrapper>
+          <Recommendations>
+            {this.props.imageResult.images && (
+              <ul>{this.renderMovies(this.state.recommendations)}</ul>
+            )}
+          </Recommendations>
+        </div>
       </Wrapper>
     );
   }
