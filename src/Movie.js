@@ -9,14 +9,13 @@ class Movie extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieResult: {},
+      movieResult: {}
     };
   }
 
   componentDidMount() {
     this.fetchInfo();
   }
-
 
   fetchInfo() {
     fetch(
