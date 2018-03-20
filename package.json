@@ -2,7 +2,7 @@
   "name": "movie-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://joanithagomez.github.io/projects/movie-finder/",
+  "homepage": "https://joanithagomez.github.io/projects/movie-finder",
   "dependencies": {
     "moviedb": "^0.2.10",
     "path-to-regexp": "^2.2.0",
