@@ -54,7 +54,7 @@ class People extends Component {
     }
 
     for (var person in sofar) {
-      personIndex = cast.findIndex(x => x.name === person);
+      personIndex = indexof(cast, person);
       // console.log(sofar[person]);
 
       if (cast[personIndex].profile_path != null) {
@@ -74,7 +74,6 @@ class People extends Component {
         </PhotoCard>
       );
     }
-
     return arr;
   }
 
@@ -102,7 +101,7 @@ class People extends Component {
     }
 
     for (var person in sofar) {
-      personIndex = crew.findIndex(x => x.name === person);
+      personIndex = indexof(crew, person);
       // console.log(sofar[person]);
       if (crew[personIndex].profile_path != null)
         headshotUrl = this.props.baseUrl + "w185" + crew[personIndex].profile_path;
@@ -131,6 +130,10 @@ class People extends Component {
       </Wrapper>
     );
   }
+}
+
+function indexof(array, person) {
+  return array.findIndex(x => x.name === person);
 }
 
 const PhotoCard = styled.div`
