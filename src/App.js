@@ -9,8 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       imageResult: {}
-    }
-  }  
+    };
+  }
   componentDidMount() {
     this.fetchConfig();
   }
@@ -23,15 +23,24 @@ class App extends Component {
     )
       .then(response => response.json())
       .then(res => {
-        this.setState({ imageResult: res });
+        this.setState({
+          imageResult: res
+        });
       });
   }
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={"/movie-finder"}>
         <div>
-          <Route exact path={"/"} render={props => <Home imageResult={this.state.imageResult}/>} /> 
-          <Route path={"/movie/:id"} render={props => <Movie imageResult={this.state.imageResult} {...props}/>} />
+          <Route
+            exact
+            path={"/"}
+            render={props => <Home imageResult={this.state.imageResult} />}
+          />
+          <Route
+            path={"/movie/:id"}
+            render={props => <Movie imageResult={this.state.imageResult} {...props} />}
+          />
         </div>
       </BrowserRouter>
     );

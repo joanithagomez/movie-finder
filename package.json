@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://joanithagomez.github.io/movie-finder/",
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "moviedb": "^0.2.10",
     "path-to-regexp": "^2.2.0",
     "react": "^16.2.0",
@@ -16,6 +17,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
