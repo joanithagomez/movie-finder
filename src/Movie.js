@@ -4,6 +4,7 @@ import "whatwg-fetch";
 import styled from "styled-components";
 import People from "./People";
 import ReleaseDate from "./ReleaseDate";
+const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
 class Movie extends Component {
   constructor(props) {
@@ -18,19 +19,9 @@ class Movie extends Component {
   }
 
   fetchInfo() {
-    fetch(
-      "https://api.themoviedb.org/3/movie/" +
-        this.props.match.params.id +
-        "?api_key=c3111a004530dd2c7aede7c5e398885e",
-      {
-        method: "GET"
-      }
-    )
-      .then(response => response.json())
-      .then(res => {
-        // console.log(res);
-        this.setState({ movieResult: res });
-      });
+    mdb.movieInfo({ id: this.props.match.params.id }, (err, res) => {
+      this.setState({ movieResult: res });
+    });
   }
 
   render() {
@@ -66,7 +57,6 @@ class Movie extends Component {
                 <img src={posterUrl} alt={this.state.movieResult.title + "poster"} />
               </Header>
               <ReleaseDate release_date={this.state.movieResult.release_date} />
-              {/* <p>{this.state.movieResult.release_date}</p> */}
               <hr />
               <OverView>
                 <p>{this.state.movieResult.overview}</p>

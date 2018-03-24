@@ -2,60 +2,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
+import RunTime from "./RunTime";
 const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  height: 100%;
-  background-color: #000;
-  color: rgba(255, 255, 255, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > h1 {
-    margin: 0;
-  }
-`;
-const Recommendations = styled.div`color: white;`;
-const List = styled.li`
-  list-style: none;
-  background-color: white;
-  border: 1px solid grey;
-`;
-const InputWrapper = styled.div`
-  font-size: 2em;
-  font-weight: 200;
-  padding: 2em 0;
-
-  > input {
-    font-size: 1em;
-    font-weight: 200;
-    text-align: center;
-    border: none;
-    border-bottom: 1px solid grey;
-    background-color: transparent;
-    padding: 0.2em 0;
-    width: 100%;
-    transition: 0.2s border ease-in;
-    color: white;
-  }
-
-  > input:focus {
-    outline: none;
-    border-bottom: 1px solid white;
-  }
-
-  @media screen and (max-width: 45em) {
-    font-size: 3em;
-    > input {
-      font-size: 2em;
-      font-weight: 200;
-    }
-  }
-`;
-
-class Home extends Component {
+export default class Home extends Component {
   constructor() {
     super();
     this.state = {
@@ -70,6 +20,7 @@ class Home extends Component {
       // this.props.history.push('/results');
       mdb.searchMovie({ query: this.state.title }, (err, res) => {
         if (res) {
+          // console.log(res);
           this.setState({ recommendations: res.results });
         }
       });
@@ -87,11 +38,14 @@ class Home extends Component {
         baseUrl + this.props.imageResult.images.poster_sizes[0] + recoms[i].poster_path;
       arr.push(
         <List value={i} key={"movie" + i}>
-          <Link to={"/movie/" + recoms[i].id}>
-            <img src={posterUrl} alt="poster" />
-            {recoms[i].title}
-            (<ReleaseDate release_date={recoms[i].release_date} />)
-          </Link>
+          <Linkstyle>
+            <Link to={"/movie/" + recoms[i].id}>
+              <img src={posterUrl} alt="poster" />
+              <Title>{recoms[i].title}</Title>
+              <RunTime id={recoms[i].id} />
+              <ReleaseDate release_date={recoms[i].release_date} />
+            </Link>
+          </Linkstyle>
         </List>
       );
     }
@@ -126,4 +80,63 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const Wrapper = styled.div`
+  min-height: 100vh;
+  height: 100%;
+  background-color: #000;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > h1 {
+    margin: 0;
+  }
+`;
+const Recommendations = styled.div`color: white;`;
+const List = styled.li`
+  list-style: none;
+  background-color: white;
+  border: 1px solid grey;
+`;
+const Title = styled.div`
+  display: inline-block;
+  font-size: 2em;
+`;
+const Linkstyle = styled.span`
+  > a {
+    color: black;
+  }
+`;
+
+const InputWrapper = styled.div`
+  font-size: 2em;
+  font-weight: 200;
+  padding: 2em 0;
+
+  > input {
+    font-size: 1em;
+    font-weight: 200;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: transparent;
+    padding: 0.2em 0;
+    width: 100%;
+    transition: 0.2s border ease-in;
+    color: white;
+  }
+
+  > input:focus {
+    outline: none;
+    border-bottom: 1px solid white;
+  }
+
+  @media screen and (max-width: 45em) {
+    font-size: 3em;
+    > input {
+      font-size: 2em;
+      font-weight: 200;
+    }
+  }
+`;

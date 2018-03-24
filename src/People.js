@@ -55,7 +55,6 @@ class People extends Component {
 
     for (var person in sofar) {
       personIndex = indexof(cast, person);
-      // console.log(sofar[person]);
 
       if (cast[personIndex].profile_path != null) {
         headshotUrl = this.props.baseUrl + "w185" + cast[personIndex].profile_path;
