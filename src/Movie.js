@@ -29,7 +29,7 @@ class Movie extends Component {
     let bgUrl;
     let posterUrl;
     let baseUrl;
-    if (this.props.imageResult.images) {
+    if (this.props.imageResult.images ) {
       baseUrl = this.props.imageResult.images.base_url;
       bgUrl =
         baseUrl +
@@ -45,7 +45,7 @@ class Movie extends Component {
       <Wrapper>
         <Background pic={bgUrl}>
           <Overlay>
-            <Content>
+            {this.state.movieResult && <Content>
               <p className="homeLink">
                 <Link to="/">Home</Link>
               </p>
@@ -66,7 +66,7 @@ class Movie extends Component {
                 imageResult={this.props.imageResult}
                 match={this.props.match}
               />
-            </Content>
+            </Content> }
           </Overlay>
         </Background>
       </Wrapper>
