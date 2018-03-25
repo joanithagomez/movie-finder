@@ -11,11 +11,12 @@ export default class Home extends Component {
       title: "",
       recommendations: [],
       id: 0,
+      isNoResults:false,
     };
   }
 
   handleSubmit(e) {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && this.state.title !== "") {
       // this.props.history.push('/results');
         fetch(
            "https://api.themoviedb.org/3/search/movie?api_key=c3111a004530dd2c7aede7c5e398885e&query="+this.state.title,
@@ -25,10 +26,17 @@ export default class Home extends Component {
          )
          .then(response => response.json())
          .then(res => {
-           if(res)
+           if(res.total_results !== 0){
            // console.log(res);
-           this.setState({
+           this.setState({             
+             isNoResults: false,
              recommendations: res.results });
+           }else{
+             this.setState({
+               recommendations: [],
+               isNoResults: true
+             });
+           }
        });
       }
   }
@@ -56,6 +64,7 @@ export default class Home extends Component {
         </List>
       );
     }
+
     return arr;
   }
 
@@ -64,7 +73,7 @@ export default class Home extends Component {
   };
 
   render() {
-    console.log(this.state.recommendations.total_results);
+    // console.log(this.state.recommendations.total_results);
     return (
       <Wrapper>
         <div>
@@ -81,6 +90,7 @@ export default class Home extends Component {
             {this.props.imageResult.images && (
               <ul>{this.renderMovies(this.state.recommendations)}</ul>
             )}
+            {this.state.isNoResults && (<div>No results</div>)}
           </Recommendations>
         </div>
       </Wrapper>
