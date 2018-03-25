@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
 import RunTime from "./RunTime";
-const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
 export default class Home extends Component {
   constructor() {
@@ -11,21 +10,29 @@ export default class Home extends Component {
     this.state = {
       title: "",
       recommendations: [],
-      id: 0
+      id: 0,
     };
   }
 
   handleSubmit(e) {
     if (e.key === "Enter") {
       // this.props.history.push('/results');
-      mdb.searchMovie({ query: this.state.title }, (err, res) => {
-        if (res) {
-          // console.log(res);
-          this.setState({ recommendations: res.results });
-        }
-      });
-    }
+        fetch(
+           "https://api.themoviedb.org/3/search/movie?api_key=c3111a004530dd2c7aede7c5e398885e&query="+this.state.title,
+           {
+             method: "GET"
+           }
+         )
+         .then(response => response.json())
+         .then(res => {
+           if(res)
+           // console.log(res);
+           this.setState({
+             recommendations: res.results });
+       });
+      }
   }
+
 
   renderMovies(recoms) {
     let arr = [];
@@ -57,6 +64,7 @@ export default class Home extends Component {
   };
 
   render() {
+    console.log(this.state.recommendations.total_results);
     return (
       <Wrapper>
         <div>

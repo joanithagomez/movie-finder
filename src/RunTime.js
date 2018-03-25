@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
 export default class RunTime extends Component {
   constructor() {
@@ -14,12 +13,23 @@ export default class RunTime extends Component {
   }
 
   fetchInfo() {
-    mdb.movieInfo({ id: this.props.id }, (err, res) => {
-      // console.log(res);
-      if (res) this.setState({ runtime: res.runtime });
-    });
+    fetch(
+     "https://api.themoviedb.org/3/movie/" +
+      this.props.id +
+       "?api_key=c3111a004530dd2c7aede7c5e398885e",
+     {
+       method: "GET"
+     }
+   )
+     .then(response => response.json())
+     .then(res => {
+       // console.log(res);
+       this.setState({ runtime: res.runtime });
+   });
+
   }
 
+  
   render() {
     if (!this.state.runtime) return <p />;
 

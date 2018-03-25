@@ -4,7 +4,6 @@ import "whatwg-fetch";
 import styled from "styled-components";
 import People from "./People";
 import ReleaseDate from "./ReleaseDate";
-const mdb = require("moviedb")("c3111a004530dd2c7aede7c5e398885e");
 
 class Movie extends Component {
   constructor(props) {
@@ -19,9 +18,21 @@ class Movie extends Component {
   }
 
   fetchInfo() {
-    mdb.movieInfo({ id: this.props.match.params.id }, (err, res) => {
-      this.setState({ movieResult: res });
-    });
+
+    fetch(
+     "https://api.themoviedb.org/3/movie/" +
+      this.props.match.params.id +
+       "?api_key=c3111a004530dd2c7aede7c5e398885e",
+     {
+       method: "GET"
+     }
+   )
+     .then(response => response.json())
+     .then(res => {
+       // console.log(res);
+       this.setState({ movieResult: res });
+   });
+
   }
 
   render() {
@@ -84,7 +95,7 @@ const Background = styled.div`
 `;
 const Overlay = styled.div`
   width: 100%;
-  background: rgba(0, 0, 0, 0.8); //rgba(26, 1, 70, 0.8);
+  background: rgba(0, 0, 0, 0.8); 
   overflow: hidden;
   min-height: 100vh;
   z-index: 2;
