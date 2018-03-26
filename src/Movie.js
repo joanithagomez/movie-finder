@@ -36,19 +36,20 @@ class Movie extends Component {
   }
 
   render() {
-    // console.log(this.props.match)
+    console.log(this.props.imageResult)
     let bgUrl;
     let posterUrl;
     let baseUrl;
-    if (this.props.imageResult.images ) {
+    if (this.props.imageResult.images && this.state.movieResult.backdrop_path && this.state.movieResult.poster_path) {
       baseUrl = this.props.imageResult.images.base_url;
+
       bgUrl =
         baseUrl +
         this.props.imageResult.images.backdrop_sizes[3] +
         this.state.movieResult.backdrop_path;
       posterUrl =
         baseUrl +
-        this.props.imageResult.images.poster_sizes[2] +
+        this.props.imageResult.images.poster_sizes[3] +
         this.state.movieResult.poster_path;
     }
 
@@ -72,11 +73,11 @@ class Movie extends Component {
               <OverView>
                 <p>{this.state.movieResult.overview}</p>
               </OverView>
-              <People
+              {this.props.imageResult && <People
                 baseUrl={baseUrl}
                 imageResult={this.props.imageResult}
                 match={this.props.match}
-              />
+              />}
             </Content> }
           </Overlay>
         </Background>
@@ -95,7 +96,7 @@ const Background = styled.div`
 `;
 const Overlay = styled.div`
   width: 100%;
-  background: rgba(0, 0, 0, 0.8); 
+  background: rgba(0, 0, 0, 0.8);
   overflow: hidden;
   min-height: 100vh;
   z-index: 2;

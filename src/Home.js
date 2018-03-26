@@ -28,7 +28,7 @@ export default class Home extends Component {
          .then(res => {
            if(res.total_results !== 0){
            // console.log(res);
-           this.setState({             
+           this.setState({
              isNoResults: false,
              recommendations: res.results });
            }else{
@@ -49,6 +49,7 @@ export default class Home extends Component {
     baseUrl = this.props.imageResult.images.base_url;
 
     for (var i in recoms) {
+      if(recoms[i].poster_path)
       posterUrl =
         baseUrl + this.props.imageResult.images.poster_sizes[0] + recoms[i].poster_path;
       arr.push(
@@ -73,7 +74,7 @@ export default class Home extends Component {
   };
 
   render() {
-    // console.log(this.state.recommendations.total_results);
+    // console.log(this.state.isNoResults);
     return (
       <Wrapper>
         <div>
