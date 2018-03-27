@@ -57,7 +57,7 @@ class People extends Component {
       personIndex = indexof(cast, person);
 
       if (cast[personIndex].profile_path != null) {
-        headshotUrl = this.props.baseUrl + "w185" + cast[personIndex].profile_path;
+        headshotUrl = this.props.secureBaseUrl + "w185" + cast[personIndex].profile_path;
       } else {
         headshotUrl =
           "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
@@ -103,7 +103,7 @@ class People extends Component {
       personIndex = indexof(crew, person);
       // console.log(sofar[person]);
       if (crew[personIndex].profile_path != null)
-        headshotUrl = this.props.baseUrl + "w185" + crew[personIndex].profile_path;
+        headshotUrl = this.props.secureBaseUrl + "w185" + crew[personIndex].profile_path;
       else {
         headshotUrl =
           "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
@@ -122,7 +122,7 @@ class People extends Component {
   }
 
   render() {
-    // console.log(this.props.baseUrl);
+    // console.log(this.props.secureBaseUrl);
     return (
       <Wrapper>
         {this.renderCrew(this.state.credits.crew)}

@@ -43,14 +43,14 @@ export default class Home extends Component {
 
   renderMovies(recoms) {
     let arr = [];
-    let baseUrl;
+    let secureBaseUrl;
     var posterUrl;
-    baseUrl = this.props.images.base_url;
+    secureBaseUrl = this.props.images.secure_base_url;
 
     for (var i in recoms) {
       if(recoms[i].poster_path)
       posterUrl =
-        baseUrl + this.props.images.poster_sizes[0] + recoms[i].poster_path;
+        secureBaseUrl + this.props.images.poster_sizes[0] + recoms[i].poster_path;
       arr.push(
         <List value={i} key={"movie" + i}>
           <Linkstyle>
@@ -70,6 +70,7 @@ export default class Home extends Component {
   handleTitleChange = event => {
     this.setState({ title: event.target.value });
   };
+
 
   render() {
     // console.log(this.state.isNoResults);

@@ -39,19 +39,19 @@ class Movie extends Component {
     // console.log(this.props.images);
     let bgUrl;
     let posterUrl;
-    var baseUrl;
+    var secureBaseUrl;
     if(this.props.images){
-      baseUrl = this.props.images.base_url;
+      secureBaseUrl = this.props.images.secure_base_url;
 
       if(this.state.movieResult.poster_path){
         posterUrl =
-          baseUrl +
+          secureBaseUrl +
           this.props.images.poster_sizes[3] +
           this.state.movieResult.poster_path;
       }
       if (this.state.movieResult.backdrop_path ) {
         bgUrl =
-          baseUrl +
+          secureBaseUrl +
           this.props.images.backdrop_sizes[3] +
           this.state.movieResult.backdrop_path;
       }
@@ -78,7 +78,7 @@ class Movie extends Component {
                 <p>{this.state.movieResult.overview}</p>
               </OverView>
               {this.props.images && <People
-                baseUrl={baseUrl}
+                secureBaseUrl={secureBaseUrl}
                 images={this.props.images}
                 match={this.props.match}
               />}
