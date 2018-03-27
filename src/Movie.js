@@ -36,23 +36,25 @@ class Movie extends Component {
   }
 
   render() {
-    console.log(this.props.images);
+    // console.log(this.props.images);
     let bgUrl;
     let posterUrl;
     var baseUrl;
-    if(this.props.images ){
+    if(this.props.images){
       baseUrl = this.props.images.base_url;
-    }
-    
-    if (this.state.movieResult.backdrop_path && this.state.movieResult.poster_path) {
-      bgUrl =
-        baseUrl +
-        this.props.images.backdrop_sizes[3] +
-        this.state.movieResult.backdrop_path;
-      posterUrl =
-        baseUrl +
-        this.props.images.poster_sizes[3] +
-        this.state.movieResult.poster_path;
+
+      if(this.state.movieResult.poster_path){
+        posterUrl =
+          baseUrl +
+          this.props.images.poster_sizes[3] +
+          this.state.movieResult.poster_path;
+      }
+      if (this.state.movieResult.backdrop_path ) {
+        bgUrl =
+          baseUrl +
+          this.props.images.backdrop_sizes[3] +
+          this.state.movieResult.backdrop_path;
+      }
     }
 
     return (

@@ -53,8 +53,6 @@ class People extends Component {
       }
     }
 
-
-    console.log("Base url: " + this.props.baseUrl );
     for (var person in sofar) {
       personIndex = indexof(cast, person);
 
@@ -64,7 +62,7 @@ class People extends Component {
         headshotUrl =
           "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
       }
-      console.log(headshotUrl);
+      // console.log(headshotUrl);
       arr.push(
         <PhotoCard key={"photocardcast" + personIndex}>
           <div value={personIndex} key={"cast" + personIndex}>
@@ -124,7 +122,7 @@ class People extends Component {
   }
 
   render() {
-    console.log(this.props.baseUrl);
+    // console.log(this.props.baseUrl);
     return (
       <Wrapper>
         {this.renderCrew(this.state.credits.crew)}
