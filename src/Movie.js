@@ -36,20 +36,22 @@ class Movie extends Component {
   }
 
   render() {
-    console.log(this.props.imageResult)
+    console.log(this.props.images);
     let bgUrl;
     let posterUrl;
-    let baseUrl;
-    if (this.props.imageResult.images && this.state.movieResult.backdrop_path && this.state.movieResult.poster_path) {
-      baseUrl = this.props.imageResult.images.base_url;
-
+    var baseUrl;
+    if(this.props.images ){
+      baseUrl = this.props.images.base_url;
+    }
+    
+    if (this.state.movieResult.backdrop_path && this.state.movieResult.poster_path) {
       bgUrl =
         baseUrl +
-        this.props.imageResult.images.backdrop_sizes[3] +
+        this.props.images.backdrop_sizes[3] +
         this.state.movieResult.backdrop_path;
       posterUrl =
         baseUrl +
-        this.props.imageResult.images.poster_sizes[3] +
+        this.props.images.poster_sizes[3] +
         this.state.movieResult.poster_path;
     }
 
@@ -73,9 +75,9 @@ class Movie extends Component {
               <OverView>
                 <p>{this.state.movieResult.overview}</p>
               </OverView>
-              {this.props.imageResult && <People
+              {this.props.images && <People
                 baseUrl={baseUrl}
-                imageResult={this.props.imageResult}
+                images={this.props.images}
                 match={this.props.match}
               />}
             </Content> }

@@ -35,11 +35,11 @@ class App extends Component {
           <Route
             exact
             path={"/"}
-            render={props => <Home imageResult={this.state.imageResult} />}
+            render={props => <Home images={this.state.imageResult.images} />}
           />
           <Route
             path={"/movie/:id"}
-            render={props => <Movie imageResult={this.state.imageResult} {...props} />}
+            render={props => <Movie images={this.state.imageResult.images} {...props} />}
           />
         </div>
       </BrowserRouter>

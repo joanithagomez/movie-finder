@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
-import RunTime from "./RunTime";
 
 export default class Home extends Component {
   constructor() {
@@ -46,19 +45,18 @@ export default class Home extends Component {
     let arr = [];
     let baseUrl;
     var posterUrl;
-    baseUrl = this.props.imageResult.images.base_url;
+    baseUrl = this.props.images.base_url;
 
     for (var i in recoms) {
       if(recoms[i].poster_path)
       posterUrl =
-        baseUrl + this.props.imageResult.images.poster_sizes[0] + recoms[i].poster_path;
+        baseUrl + this.props.images.poster_sizes[0] + recoms[i].poster_path;
       arr.push(
         <List value={i} key={"movie" + i}>
           <Linkstyle>
             <Link to={"/movie/" + recoms[i].id}>
               <img src={posterUrl} alt="poster" />
               <Title>{recoms[i].title}</Title>
-              <RunTime id={recoms[i].id} />
               <ReleaseDate release_date={recoms[i].release_date} />
             </Link>
           </Linkstyle>
@@ -88,7 +86,7 @@ export default class Home extends Component {
             />
           </InputWrapper>
           <Recommendations>
-            {this.props.imageResult.images && (
+            {this.props.images && (
               <ul>{this.renderMovies(this.state.recommendations)}</ul>
             )}
             {this.state.isNoResults && (<div>No results</div>)}
