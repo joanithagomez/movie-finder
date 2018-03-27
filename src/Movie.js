@@ -74,6 +74,8 @@ class Movie extends Component {
                 <Image><img src={posterUrl} alt={this.state.movieResult.title + "poster"} /></Image>
               </Header>
               <ReleaseDate release_date={this.state.movieResult.release_date} />
+              <Time>{this.state.movieResult.runtime} mins</Time>
+
               <hr />
               <OverView>
                 <p>{this.state.movieResult.overview}</p>
@@ -115,7 +117,7 @@ const Header = styled.div`
   }
   .title {
     padding: 0;
-    font-size: 6em;
+    font-size: 4em;
     font-weight: 200;
     color: red;
     margin-bottom: 0;
@@ -130,6 +132,8 @@ const Header = styled.div`
     font-size: 1em;
   }
 `;
+const Time = styled.div`opacity: 0.8;`;
+
 const Image = styled.div `
   text-align: right;
 `;

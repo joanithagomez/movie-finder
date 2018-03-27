@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const Year = styled.span`
-  opacity: 0.8;
-  font-size: 0.8em;
+  font-size: 1em;
 `;
 
-class ReleaseDate extends Component {
+export default class ReleaseDate extends Component {
   render() {
     var date = this.props.release_date;
     if (!date) return <div>''</div>;
@@ -14,5 +13,3 @@ class ReleaseDate extends Component {
     return <Year>{arr[0]}</Year>;
   }
 }
-
-export default ReleaseDate;

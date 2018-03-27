@@ -7,32 +7,32 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      title: "harry",
+      title: "",
       recommendations: [],
       id: 0,
       isNoResults:false,
     };
 
-    fetch(
-       "https://api.themoviedb.org/3/search/movie?api_key=c3111a004530dd2c7aede7c5e398885e&query="+this.state.title,
-       {
-         method: "GET"
-       }
-     )
-     .then(response => response.json())
-     .then(res => {
-       if(res.total_results !== 0){
-       // console.log(res);
-       this.setState({
-         isNoResults: false,
-         recommendations: res.results });
-       }else{
-         this.setState({
-           recommendations: [],
-           isNoResults: true
-         });
-       }
-   });
+   //  fetch(
+   //     "https://api.themoviedb.org/3/search/movie?api_key=c3111a004530dd2c7aede7c5e398885e&query="+this.state.title,
+   //     {
+   //       method: "GET"
+   //     }
+   //   )
+   //   .then(response => response.json())
+   //   .then(res => {
+   //     if(res.total_results !== 0){
+   //     // console.log(res);
+   //     this.setState({
+   //       isNoResults: false,
+   //       recommendations: res.results });
+   //     }else{
+   //       this.setState({
+   //         recommendations: [],
+   //         isNoResults: true
+   //       });
+   //     }
+   // });
   }
 
 
@@ -135,6 +135,7 @@ const Wrapper = styled.div`
   > h1 {
     margin: 0;
   }
+
 `;
 
 const Recommendations = styled.div`
