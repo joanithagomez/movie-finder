@@ -40,13 +40,14 @@ class Movie extends Component {
     let bgUrl;
     let posterUrl;
     var secureBaseUrl;
+
     if(this.props.images){
       secureBaseUrl = this.props.images.secure_base_url;
 
       if(this.state.movieResult.poster_path){
         posterUrl =
           secureBaseUrl +
-          this.props.images.poster_sizes[3] +
+          this.props.images.poster_sizes[2] +
           this.state.movieResult.poster_path;
       }
       if (this.state.movieResult.backdrop_path ) {
@@ -70,7 +71,7 @@ class Movie extends Component {
                   <h1 className="title">{this.state.movieResult.title}</h1>
                   <h2 className="tagline">{this.state.movieResult.tagline}</h2>
                 </div>
-                <img src={posterUrl} alt={this.state.movieResult.title + "poster"} />
+                <Image><img src={posterUrl} alt={this.state.movieResult.title + "poster"} /></Image>
               </Header>
               <ReleaseDate release_date={this.state.movieResult.release_date} />
               <hr />
@@ -108,7 +109,8 @@ const Overlay = styled.div`
 
 const Header = styled.div`
   display: flex;
-  ${"" /* border: 1px solid red; */} > div {
+   //border: 1px solid red;
+  > div {
     width: 60%;
   }
   .title {
@@ -117,12 +119,10 @@ const Header = styled.div`
     font-weight: 200;
     color: red;
     margin-bottom: 0;
-    // border: 1px solid yellow;
+    //border: 1px solid yellow;
   }
 
   .tagline {
-    // text-align:center;
-    // border: 1px solid yellow;
     font-weight: 200;
     margin: 0;
     text-transform: uppercase;
@@ -130,7 +130,9 @@ const Header = styled.div`
     font-size: 1em;
   }
 `;
-
+const Image = styled.div `
+  text-align: right;
+`;
 const OverView = styled.div`
   display: flex;
 

@@ -33,7 +33,6 @@ class People extends Component {
   renderCast(cast) {
     let arr = [],
       i,
-      headshotUrl,
       end = 4,
       sofar = {},
       personIndex,
@@ -56,17 +55,9 @@ class People extends Component {
     for (var person in sofar) {
       personIndex = indexof(cast, person);
 
-      if (cast[personIndex].profile_path != null) {
-        headshotUrl = this.props.secureBaseUrl + "w185" + cast[personIndex].profile_path;
-      } else {
-        headshotUrl =
-          "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
-      }
-      // console.log(headshotUrl);
       arr.push(
         <PhotoCard key={"photocardcast" + personIndex}>
           <div value={personIndex} key={"cast" + personIndex}>
-            <img src={headshotUrl} alt="cast" />
             <p>{person}</p>
             <p>{sofar[person]}</p>
           </div>
@@ -79,7 +70,6 @@ class People extends Component {
   renderCrew(crew) {
     let arr = [],
       i,
-      headshotUrl,
       end = 4,
       sofar = {},
       personIndex,
@@ -101,17 +91,9 @@ class People extends Component {
 
     for (var person in sofar) {
       personIndex = indexof(crew, person);
-      // console.log(sofar[person]);
-      if (crew[personIndex].profile_path != null)
-        headshotUrl = this.props.secureBaseUrl + "w185" + crew[personIndex].profile_path;
-      else {
-        headshotUrl =
-          "https://upload.wikimedia.org/wikipedia/en/b/b1/Portrait_placeholder.png";
-      }
       arr.push(
         <PhotoCard key={"photocardcrew" + personIndex}>
           <div value={personIndex} key={"crew" + personIndex}>
-            <img src={headshotUrl} alt="crew" />
             <p>{person}</p>
             <p>{sofar[person]}</p>
           </div>
