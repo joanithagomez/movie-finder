@@ -18,7 +18,6 @@ class Movie extends Component {
   }
 
   fetchInfo() {
-
     fetch(
      "https://api.themoviedb.org/3/movie/" +
       this.props.match.params.id +
@@ -62,21 +61,24 @@ class Movie extends Component {
       <Wrapper>
         <Background pic={bgUrl}>
           <Overlay>
+            <HomeLink className="homeLink">
+              <Link to="/">Home</Link>
+            </HomeLink>
             {this.state.movieResult && <Content>
-              <p className="homeLink">
-                <Link to="/">Home</Link>
-              </p>
+
               <Header>
+                <Image><img src={posterUrl} alt={this.state.movieResult.title + "poster"} /></Image>
                 <div>
                   <h1 className="title">{this.state.movieResult.title}</h1>
                   <h2 className="tagline">{this.state.movieResult.tagline}</h2>
                 </div>
-                <Image><img src={posterUrl} alt={this.state.movieResult.title + "poster"} /></Image>
               </Header>
-              <ReleaseDate release_date={this.state.movieResult.release_date} />
+              <ReleaseDate release_date={this.state.movieResult.release_date}></ReleaseDate>
               <Time>{this.state.movieResult.runtime} mins</Time>
 
               <hr />
+
+              <Block>
               <OverView>
                 <p>{this.state.movieResult.overview}</p>
               </OverView>
@@ -85,6 +87,8 @@ class Movie extends Component {
                 images={this.props.images}
                 match={this.props.match}
               />}
+            </Block>
+
             </Content> }
           </Overlay>
         </Background>
@@ -93,7 +97,9 @@ class Movie extends Component {
   }
 }
 
-const Wrapper = styled.div`color: white;`;
+const Wrapper = styled.div`
+color: white;`
+;
 
 const Background = styled.div`
   background-image: url(${props => props.pic});
@@ -101,6 +107,7 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
 `;
+
 const Overlay = styled.div`
   width: 100%;
   background: rgba(0, 0, 0, 0.8);
@@ -109,15 +116,21 @@ const Overlay = styled.div`
   z-index: 2;
 `;
 
-const Header = styled.div`
-  display: flex;
-   //border: 1px solid red;
-  > div {
-    width: 60%;
+
+const HomeLink = styled.span`
+> a {
+    padding: 2%;
+    text-decoration: none;
+    color: white;
+    font-size: 0.6em;
+    float: right;
   }
+`;
+
+const Header = styled.div`
   .title {
     padding: 0;
-    font-size: 4em;
+    font-size: 2em;
     font-weight: 200;
     color: red;
     margin-bottom: 0;
@@ -125,45 +138,82 @@ const Header = styled.div`
   }
 
   .tagline {
+    font-size: 0.8em;
     font-weight: 200;
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 1em;
+  }
+
+  @media screen and (min-width: 45em) {
+    display: flex;
+    .title {
+      padding: 0;
+      font-size: 4em;
+      font-weight: 200;
+      color: red;
+      margin-bottom: 0;
+    }
+
+    .tagline {
+      font-weight: 200;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 1em;
+    }
   }
 `;
-const Time = styled.div`opacity: 0.8;`;
+
+const Time = styled.div`
+font-size: 0.6em;
+font-weight:100;
+opacity: 0.8;
+text-align: left;
+
+@media screen and (min-width: 45em) {
+  font-size: 1em;
+}
+  `;
 
 const Image = styled.div `
-  text-align: right;
+  text-align: left;
+  padding-top: 2em;
+  padding-right: 2em;
 `;
-const OverView = styled.div`
-  display: flex;
 
+const OverView = styled.div`
+  width: 100%;
   > p {
     font-weight: 100;
-    font-size: 1em;
+    font-size: 0.8em;
+    letter-spacing: 0.2px;
+  }
+  @media screen and (min-width: 45em) {
+    width: 50%;
+    ${'' /* border: 1px solid red; */}
+    padding: 0em 1em;
+    > p {
+      margin: 0;
+      font-weight: 100;
+      font-size: 1em;
+    }
   }
 `;
+
 const Content = styled.div`
-  padding: 4% 10%;
-
-  > p {
-    font-size: 1em;
-    padding: 0;
-    color: white;
-    font-weight: 200;
-    ${"" /* background-color: white; */};
-  }
-
-  > .homeLink > a {
-    text-decoration: none;
-    color: white;
-    font-size: 0.6em;
-    float: right;
-  }
+  padding: 6% 10%;
   > hr {
     border: 0.5px solid grey;
   }
 `;
+
+const Block = styled.div`
+  display: block;
+  @media screen and (min-width: 45em) {
+    display: flex;
+    padding: 1em 0;
+  }
+`;
+
 export default Movie;

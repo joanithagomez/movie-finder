@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "whatwg-fetch";
 
-class People extends Component {
+export default class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +41,7 @@ class People extends Component {
     if (!cast || cast.length === 0) return;
     if (cast.length < end) end = cast.length;
 
-    arr.push(<h4 key="cast">Cast</h4>);
+    arr.push(<p key="cast">Actors</p>);
 
     for (i = 0; i < end; i++) {
       if (!sofar[cast[i].name]) sofar[cast[i].name] = [cast[i].character];
@@ -58,8 +58,7 @@ class People extends Component {
       arr.push(
         <PhotoCard key={"photocardcast" + personIndex}>
           <div value={personIndex} key={"cast" + personIndex}>
-            <p>{person}</p>
-            <p>{sofar[person]}</p>
+              <Person><span>{sofar[person]} </span>{person}</Person>
           </div>
         </PhotoCard>
       );
@@ -70,15 +69,13 @@ class People extends Component {
   renderCrew(crew) {
     let arr = [],
       i,
-      end = 4,
+      end = 3,
       sofar = {},
       personIndex,
       innerarr = [];
 
     if (!crew || crew.length === 0) return;
     if (crew.length < end) end = crew.length;
-
-    arr.push(<h4 key="crew">Crew</h4>);
 
     for (i = 0; i < end; i++) {
       if (!sofar[crew[i].name]) sofar[crew[i].name] = [crew[i].job];
@@ -94,8 +91,7 @@ class People extends Component {
       arr.push(
         <PhotoCard key={"photocardcrew" + personIndex}>
           <div value={personIndex} key={"crew" + personIndex}>
-            <p>{person}</p>
-            <p>{sofar[person]}</p>
+            <Person><span>{sofar[person]} </span>{person}</Person>
           </div>
         </PhotoCard>
       );
@@ -118,24 +114,30 @@ function indexof(array, person) {
   return array.findIndex(x => x.name === person);
 }
 
+const Wrapper = styled.div`
+  width: 100%;
+
+  @media screen and (min-width: 45em) {
+    width: 50%;
+    padding-left: 6em;
+    ${'' /* border: 1px solid red; */}
+  }
+
+  `;
+
 const PhotoCard = styled.div`
   color: white;
-  display: inline-block;
-   justify-content: center;
-   ${"" /* border: 1px solid red; */}
-> div
-    display:flex;
-    ${"" /* border: 1px solid yellow; */};
-  }
-  > h4{
-    display: block;
-  }
-  > div > p{
-    font-weight: 100;
+  display: block;
+
+`;
+const Person = styled.div`
+  font-size: 1em;
+  font-weight:100;
+
+  > span{
+    font-weight:300;
+    opacity: 0.8;
     font-size: 0.8em;
+
   }
 `;
-
-const Wrapper = styled.div`display: block;`;
-
-export default People;
