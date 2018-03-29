@@ -129,8 +129,9 @@ const Wrapper = styled.div`
   height: 100%;
   background-color: #000;
   color: rgba(255, 255, 255, 0.6);
-
-  //border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   > h1 {
     margin: 0;
@@ -139,22 +140,22 @@ const Wrapper = styled.div`
 `;
 
 const Recommendations = styled.div`
-color:white;
+  color: white;
+  //border: 1px solid green;
 
-`;
+  `;
+
 const Grid = styled.div`
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 30px;
-  max-width: auto;
+  min-width: 748px;
   margin: 0 100px;
-//  border: 1px solid white;
-
+  //border: 1px solid white;
 `;
 
 const List = styled.div`
   width: auto;
-
   background-color: transparent;
   position: relative;
   cursor: pointer;
@@ -171,14 +172,18 @@ const Linkstyle = styled.span`
 `;
 
 const InputWrapper = styled.div`
- display: flex;
-justify-content: center;
-align-items: center;
+   //border: 1px solid red;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+
 `;
 const Input = styled.div`
   font-size: 1.2em;
   font-weight: 200;
   padding: 2em 0;
+  ${'' /* border: 1px solid red; */}
 
   > input {
     font-size: 1em;
