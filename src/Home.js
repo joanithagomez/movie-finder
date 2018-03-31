@@ -85,9 +85,11 @@ export default class Home extends Component {
             <Linkstyle>
               <Link to={"/movie/" + recoms[i].id}>
                 <img src={posterUrl} alt="poster" />
+                <div>
                 <AddIcon dangerouslySetInnerHTML={this.createMarkup()}></AddIcon>
                 <Title>{recoms[i].title}</Title>
                 <ReleaseDate release_date={recoms[i].release_date} />
+              </div>
               </Link>
             </Linkstyle>
           </List>
@@ -152,7 +154,6 @@ const AddIcon = styled.span`
 
 const Recommendations = styled.div`
   color: white;
-  //border: 1px solid green;
 
   `;
 
@@ -171,6 +172,7 @@ const List = styled.div`
   position: relative;
   cursor: pointer;
   min-height: 100%;
+  ${'' /* border: 1px solid green; */}
 `;
 const Title = styled.div`
   font-size: 1em;
@@ -187,8 +189,6 @@ const InputWrapper = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
-
-
 `;
 const Input = styled.div`
   font-size: 1.2em;
