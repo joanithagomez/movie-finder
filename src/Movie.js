@@ -46,7 +46,7 @@ class Movie extends Component {
       if(this.state.movieResult.poster_path){
         posterUrl =
           secureBaseUrl +
-          this.props.images.poster_sizes[2] +
+          this.props.images.poster_sizes[1] +
           this.state.movieResult.poster_path;
       }
       if (this.state.movieResult.backdrop_path ) {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
+const feather = require('feather-icons');
 
 export default class Home extends Component {
   constructor() {
@@ -84,6 +85,7 @@ export default class Home extends Component {
             <Linkstyle>
               <Link to={"/movie/" + recoms[i].id}>
                 <img src={posterUrl} alt="poster" />
+                <AddIcon dangerouslySetInnerHTML={this.createMarkup()}></AddIcon>
                 <Title>{recoms[i].title}</Title>
                 <ReleaseDate release_date={recoms[i].release_date} />
               </Link>
@@ -94,6 +96,11 @@ export default class Home extends Component {
 
       return arr;
     }
+
+
+createMarkup() {
+  return {__html: feather.icons["plus"].toSvg()};
+}
 
 
   render() {
@@ -137,6 +144,10 @@ const Wrapper = styled.div`
     margin: 0;
   }
 
+`;
+const AddIcon = styled.span`
+  float: right;
+  opacity: 0.6;
 `;
 
 const Recommendations = styled.div`

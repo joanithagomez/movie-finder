@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://joanithagomez.github.io/movie-finder/",
   "dependencies": {
+    "feather-icons": "^4.7.0",
     "gh-pages": "^1.1.0",
     "moviedb": "^0.2.10",
     "path-to-regexp": "^2.2.0",
