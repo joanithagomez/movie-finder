@@ -41,7 +41,6 @@ export default class People extends Component {
     if (!cast || cast.length === 0) return;
     if (cast.length < end) end = cast.length;
 
-    arr.push(<p key="cast">Actors</p>);
 
     for (i = 0; i < end; i++) {
       if (!sofar[cast[i].name]) sofar[cast[i].name] = [cast[i].character];
@@ -58,7 +57,7 @@ export default class People extends Component {
       arr.push(
         <PhotoCard key={"photocardcast" + personIndex}>
           <div value={personIndex} key={"cast" + personIndex}>
-              <Person><span>{sofar[person]} </span>{person}</Person>
+              <Person><Label>{sofar[person]}</Label><Name>{person}</Name></Person>
           </div>
         </PhotoCard>
       );
@@ -91,7 +90,7 @@ export default class People extends Component {
       arr.push(
         <PhotoCard key={"photocardcrew" + personIndex}>
           <div value={personIndex} key={"crew" + personIndex}>
-            <Person><span>{sofar[person]} </span>{person}</Person>
+            <Person><Label>{sofar[person]}</Label><Name>{person}</Name></Person>
           </div>
         </PhotoCard>
       );
@@ -133,11 +132,30 @@ const PhotoCard = styled.div`
 const Person = styled.div`
   font-size: 1em;
   font-weight:100;
+`;
 
-  > span{
-    font-weight:300;
-    opacity: 0.8;
-    font-size: 0.8em;
+const Label = styled.span`
+  font-weight:300;
+  opacity: 0.8;
+  font-size: 0.8em;
+  display: inline-block;
+  width: 140px;
+  text-align: right;
 
-  }
+  ${'' /* border: 1px solid red; */}
+`;
+
+const Name = styled.span`
+width: 200px;
+display: inline-block;
+text-align: left;
+${'' /* border: 1px solid green; */}
+margin-left: 2%;
+
+@media screen and (min-width: 45em) {
+
+  margin-left: 6%;
+
+}
+
 `;
