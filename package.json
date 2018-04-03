@@ -4,8 +4,10 @@
   "private": true,
   "homepage": "https://joanithagomez.github.io/movie-finder/",
   "dependencies": {
+    "cross-spawn": "^6.0.5",
     "feather-icons": "^4.7.0",
     "gh-pages": "^1.1.0",
+    "gm": "^1.23.1",
     "moviedb": "^0.2.10",
     "path-to-regexp": "^2.2.0",
     "react": "^16.2.0",

@@ -142,7 +142,6 @@ const Header = styled.div`
     font-weight: 200;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
   }
 
   @media screen and (min-width: 45em) {

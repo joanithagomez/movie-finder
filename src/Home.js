@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
 const feather = require('feather-icons');
 
+
 export default class Home extends Component {
   constructor() {
     super();
@@ -71,6 +72,7 @@ export default class Home extends Component {
 
 
     renderMovies(recoms) {
+
       let arr = [];
       let secureBaseUrl;
       var posterUrl;
@@ -80,6 +82,9 @@ export default class Home extends Component {
         if(recoms[i].poster_path)
         posterUrl =
           secureBaseUrl + this.props.images.poster_sizes[1] + recoms[i].poster_path;
+
+
+
         arr.push(
           <List value={i} key={"movie" + i}>
             <Linkstyle>
@@ -135,17 +140,19 @@ createMarkup() {
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  height: 100%;
+  ${'' /* height: 100%; */}
   background-color: #000;
   color: rgba(255, 255, 255, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 
   > h1 {
     margin: 0;
   }
-
+  @media screen and (min-width: 45em) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const AddIcon = styled.span`
   float: right;
@@ -161,8 +168,9 @@ const Grid = styled.div`
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 30px;
-  min-width: 748px;
-  margin: 0 100px;
+  ${'' /* min-width: 748px; */}
+  ${'' /* margin: 0 320x; */}
+  text-align: center;
   //border: 1px solid white;
 `;
 
@@ -172,7 +180,7 @@ const List = styled.div`
   position: relative;
   cursor: pointer;
   min-height: 100%;
-  ${'' /* border: 1px solid green; */}
+//  border: 1px solid green;
 `;
 const Title = styled.div`
   font-size: 1em;
@@ -189,6 +197,7 @@ const InputWrapper = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   padding: 1em;
 `;
 const Input = styled.div`
   font-size: 1.2em;
