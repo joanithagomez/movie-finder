@@ -51,15 +51,16 @@ export default class People extends Component {
       }
     }
 
+    arr.push(<Label>Cast</Label>);
     for (var person in sofar) {
       personIndex = indexof(cast, person);
 
       arr.push(
-        <PhotoCard key={"photocardcast" + personIndex}>
+
           <div value={personIndex} key={"cast" + personIndex}>
-              <Person><Label>{sofar[person]}</Label><Name>{person}</Name></Person>
+            <Name>{person}</Name>
           </div>
-        </PhotoCard>
+
       );
     }
     return arr;
@@ -88,11 +89,9 @@ export default class People extends Component {
     for (var person in sofar) {
       personIndex = indexof(crew, person);
       arr.push(
-        <PhotoCard key={"photocardcrew" + personIndex}>
           <div value={personIndex} key={"crew" + personIndex}>
             <Person><Label>{sofar[person]}</Label><Name>{person}</Name></Person>
           </div>
-        </PhotoCard>
       );
     }
     return arr;
@@ -103,7 +102,9 @@ export default class People extends Component {
     return (
       <Wrapper>
         {this.renderCrew(this.state.credits.crew)}
-        {this.renderCast(this.state.credits.cast)}
+        <PhotoCard>
+          {this.renderCast(this.state.credits.cast)}
+        </PhotoCard>
       </Wrapper>
     );
   }
@@ -125,13 +126,14 @@ const Wrapper = styled.div`
   `;
 
 const PhotoCard = styled.div`
-  color: white;
+  border : 1px solid white;
   display: block;
-
 `;
 const Person = styled.div`
   font-size: 1em;
   font-weight:100;
+ ${'' /* border: 1px solid white;  */}
+
 `;
 
 const Label = styled.span`
@@ -142,14 +144,13 @@ const Label = styled.span`
   width: 140px;
   text-align: right;
 
-  ${'' /* border: 1px solid red; */}
+border: 1px solid red;
 `;
 
 const Name = styled.span`
 width: 200px;
 display: inline-block;
-text-align: left;
-${'' /* border: 1px solid green; */}
+border: 1px solid green;
 margin-left: 2%;
 
 @media screen and (min-width: 45em) {

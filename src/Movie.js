@@ -62,19 +62,23 @@ class Movie extends Component {
         <Background pic={bgUrl}>
           <Overlay>
             <HomeLink className="homeLink">
-              <Link to="/">Home</Link>
+              <Link to="/">
+              <BackIcon>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 8 12 12 16"></polyline><line x1="16" y1="12" x2="8" y2="12"></line></svg>
+              </BackIcon>
+            </Link>
             </HomeLink>
             {this.state.movieResult && <Content>
 
               <Header>
-                <Image><img src={posterUrl} alt={this.state.movieResult.title + "poster"} /></Image>
+                <Image><img src={posterUrl} alt={"movie poster"} /></Image>
                 <div>
                   <h1 className="title">{this.state.movieResult.title}</h1>
                   <h2 className="tagline">{this.state.movieResult.tagline}</h2>
                 </div>
               </Header>
-              <ReleaseDate release_date={this.state.movieResult.release_date}></ReleaseDate>
-              <Time>{this.state.movieResult.runtime} mins</Time>
+              {this.state.movieResult.release_date && <ReleaseDate release_date={this.state.movieResult.release_date}></ReleaseDate>}
+              {this.state.movieResult.runtime && <Time>{this.state.movieResult.runtime} mins</Time>}
 
               <hr />
 
@@ -118,6 +122,7 @@ const Overlay = styled.div`
 
 
 const HomeLink = styled.span`
+
 > a {
     padding: 2%;
     text-decoration: none;
@@ -126,7 +131,11 @@ const HomeLink = styled.span`
     float: right;
   }
 `;
-
+const BackIcon= styled.div`
+width: 50px;
+height: auto;
+stroke-width: 1;
+`;
 const Header = styled.div`
   .title {
     padding: 0;
@@ -199,6 +208,7 @@ const OverView = styled.div`
     }
   }
 `;
+
 
 const Content = styled.div`
   padding: 6% 10%;
