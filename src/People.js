@@ -55,7 +55,6 @@ export default class People extends Component {
   }
 
   renderCrew(crew) {
-    console.log(crew);
     let arr = [],
       i,
       end = 5,
@@ -65,7 +64,7 @@ export default class People extends Component {
     if (crew.length < end) end = crew.length;
 
     for (i = 0; i < end; i++) {
-      if(map[crew[i].job] == undefined){
+      if(map[crew[i].job] === undefined){
         map[crew[i].job] = crew[i].name;
       }else{
         map[crew[i].job] = map[crew[i].job] + ", "+ crew[i].name;
@@ -73,7 +72,7 @@ export default class People extends Component {
     }
 
     for(var key in map){
-      arr.push(<PhotoCard><Label>{key}</Label><Name>{map[key]}</Name></PhotoCard>);
+      arr.push(<PhotoCard key={key}><Label>{key}</Label><Name>{map[key]}</Name></PhotoCard>);
     }
 
     return arr;
@@ -92,10 +91,6 @@ export default class People extends Component {
   }
 }
 
-function indexof(array, person) {
-  return array.findIndex(x => x.name === person);
-}
-
 const Wrapper = styled.div`
   width: 100%;
 
@@ -110,6 +105,7 @@ const Wrapper = styled.div`
 const PhotoCard = styled.div`
 //border : 1px solid white;
   display: flex;
+  padding: 0.5%;
 `;
 const Label = styled.span`
   font-weight:300;
@@ -117,10 +113,11 @@ const Label = styled.span`
   font-size: 0.8em;
   display: inline-block;
   width: 140px;
-  padding: 1%;
   text-align: right;
  //border: 1px solid red;
-
+ @media screen and (min-width: 45em) {
+   font-size: 0.8em;
+}
 `;
 
 const Name = styled.span`
@@ -128,10 +125,9 @@ width: 200px;
 font-weight:100;
 //border: 1px solid green;
 margin-left: 2%;
-padding: 1%;
 
 @media screen and (min-width: 45em) {
-
+  font-size: 0.8em;
   margin-left: 6%;
 
 }
