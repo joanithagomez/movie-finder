@@ -32,68 +32,50 @@ export default class People extends Component {
 
   renderCast(cast) {
     let arr = [],
-      i,
+      i ,
       end = 4,
-      sofar = {},
-      personIndex,
-      innerarr = [];
+      castSet = new Set();
 
     if (!cast || cast.length === 0) return;
     if (cast.length < end) end = cast.length;
 
 
-    for (i = 0; i < end; i++) {
-      if (!sofar[cast[i].name]) sofar[cast[i].name] = [cast[i].character];
-      else {
-        innerarr = sofar[cast[i].name];
-        innerarr.push(", " + cast[i].character);
-        sofar[cast[i].name] = innerarr;
-      }
+    arr.push(<Label key="cast">Cast</Label>);
+
+    //using set to remove duplicates
+    for(i = 0; i < end; i++){
+      castSet.add(cast[i].name);
     }
 
-    arr.push(<Label>Cast</Label>);
-    for (var person in sofar) {
-      personIndex = indexof(cast, person);
+    let peopleArr = [...castSet];
+    let names = peopleArr.join(', ');
 
-      arr.push(
-
-          <div value={personIndex} key={"cast" + personIndex}>
-            <Name>{person}</Name>
-          </div>
-
-      );
-    }
+    arr.push(<Name key="name">{names}</Name>);
     return arr;
   }
 
   renderCrew(crew) {
+    console.log(crew);
     let arr = [],
       i,
-      end = 3,
-      sofar = {},
-      personIndex,
-      innerarr = [];
+      end = 5,
+      map = {};
 
     if (!crew || crew.length === 0) return;
     if (crew.length < end) end = crew.length;
 
     for (i = 0; i < end; i++) {
-      if (!sofar[crew[i].name]) sofar[crew[i].name] = [crew[i].job];
-      else {
-        innerarr = sofar[crew[i].name];
-        innerarr.push(", " + crew[i].job);
-        sofar[crew[i].name] = innerarr;
+      if(map[crew[i].job] == undefined){
+        map[crew[i].job] = crew[i].name;
+      }else{
+        map[crew[i].job] = map[crew[i].job] + ", "+ crew[i].name;
       }
     }
 
-    for (var person in sofar) {
-      personIndex = indexof(crew, person);
-      arr.push(
-          <div value={personIndex} key={"crew" + personIndex}>
-            <Person><Label>{sofar[person]}</Label><Name>{person}</Name></Person>
-          </div>
-      );
+    for(var key in map){
+      arr.push(<PhotoCard><Label>{key}</Label><Name>{map[key]}</Name></PhotoCard>);
     }
+
     return arr;
   }
 
@@ -126,32 +108,27 @@ const Wrapper = styled.div`
   `;
 
 const PhotoCard = styled.div`
-  border : 1px solid white;
-  display: block;
+//border : 1px solid white;
+  display: flex;
 `;
-const Person = styled.div`
-  font-size: 1em;
-  font-weight:100;
- ${'' /* border: 1px solid white;  */}
-
-`;
-
 const Label = styled.span`
   font-weight:300;
   opacity: 0.8;
   font-size: 0.8em;
   display: inline-block;
   width: 140px;
+  padding: 1%;
   text-align: right;
+ //border: 1px solid red;
 
-border: 1px solid red;
 `;
 
 const Name = styled.span`
 width: 200px;
-display: inline-block;
-border: 1px solid green;
+font-weight:100;
+//border: 1px solid green;
 margin-left: 2%;
+padding: 1%;
 
 @media screen and (min-width: 45em) {
 
