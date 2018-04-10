@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReleaseDate from "./ReleaseDate";
-const feather = require('feather-icons');
+import Modal from 'react-responsive-modal';
 
+const feather = require('feather-icons');
 
 export default class Home extends Component {
   constructor() {
@@ -13,30 +14,21 @@ export default class Home extends Component {
       recommendations: [],
       id: 0,
       isNoResults:false,
+      open: false,
     };
-
-   //  fetch(
-   //     "https://api.themoviedb.org/3/search/movie?api_key=c3111a004530dd2c7aede7c5e398885e&query="+this.state.title,
-   //     {
-   //       method: "GET"
-   //     }
-   //   )
-   //   .then(response => response.json())
-   //   .then(res => {
-   //     if(res.total_results !== 0){
-   //     // console.log(res);
-   //     this.setState({
-   //       isNoResults: false,
-   //       recommendations: res.results });
-   //     }else{
-   //       this.setState({
-   //         recommendations: [],
-   //         isNoResults: true
-   //       });
-   //     }
-   // });
   }
 
+    onOpenModal = (e) => {
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+      console.log("Open clicked");
+
+      this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+      this.setState({ open: false });
+    };
 
   handleSubmit(e) {
     if (e.key === "Enter" && this.state.title !== "") {
@@ -84,18 +76,17 @@ export default class Home extends Component {
           secureBaseUrl + this.props.images.poster_sizes[1] + recoms[i].poster_path;
 
 
-
         arr.push(
           <List value={i} key={"movie" + i}>
             <Linkstyle>
-              <Link to={"/movie/" + recoms[i].id}>
-                <img src={posterUrl} alt="poster" />
-                <div>
-                <AddIcon dangerouslySetInnerHTML={this.createMarkup()}></AddIcon>
-                <Title>{recoms[i].title}</Title>
-                <ReleaseDate release_date={recoms[i].release_date} />
+              <div>
+                <Link to={"/movie/" + recoms[i].id}>
+                  <img src={posterUrl} alt="poster" />
+                  <Title>{recoms[i].title}</Title>
+                  <ReleaseDate release_date={recoms[i].release_date} />
+                </Link>
+                <AddIcon onClick={this.onOpenModal.bind(this)} dangerouslySetInnerHTML={this.createMarkup()}></AddIcon>
               </div>
-              </Link>
             </Linkstyle>
           </List>
         );
@@ -111,10 +102,22 @@ createMarkup() {
 
 
   render() {
+    const { open } = this.state;
     // console.log(this.state.isNoResults);
     return (
+
       <Wrapper>
         <div>
+          <Modal open={open} onClose={this.onCloseModal} little>
+            <h2>Create List</h2>
+            <form>
+              <label>New list:</label>
+              <input
+                placeholder="Untitled"
+                type="text"
+              />
+            </form>
+          </Modal>
           <InputWrapper>
             <Input>
             What movie are you after?
@@ -138,6 +141,8 @@ createMarkup() {
   }
 }
 
+
+
 const Wrapper = styled.div`
   min-height: 100vh;
   ${'' /* height: 100%; */}
@@ -154,46 +159,50 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `;
-const AddIcon = styled.span`
-  float: right;
-  opacity: 0.6;
-`;
 
 const Recommendations = styled.div`
   color: white;
-
   `;
 
 const Grid = styled.div`
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 30px;
-  ${'' /* min-width: 748px; */}
-  ${'' /* margin: 0 320x; */}
   text-align: center;
   //border: 1px solid white;
 `;
 
 const List = styled.div`
+  //border: 0.3px solid white;
   width: auto;
   background-color: transparent;
   position: relative;
   cursor: pointer;
   min-height: 100%;
-//  border: 1px solid green;
 `;
+
 const Title = styled.div`
   font-size: 1em;
 `;
+
+const AddIcon = styled.span`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0.6;
+  :hover{
+    opacity: 1;
+  }
+`;
 const Linkstyle = styled.span`
-  > a {
+
+  > div > a {
     color: white;
     text-decoration: none;
   }
 `;
 
 const InputWrapper = styled.div`
-   //border: 1px solid red;
    display: flex;
    justify-content: center;
    align-items: center;

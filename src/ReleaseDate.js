@@ -15,7 +15,7 @@ const Year = styled.span`
 export default class ReleaseDate extends Component {
   render() {
     var date = this.props.release_date;
-    if (!date) return <div>''</div>;
+    if (!date) return <div></div>;
     let arr = date.split("-");
     return <Year>{arr[0]}</Year>;
   }
